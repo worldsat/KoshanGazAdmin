@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">  مدیریت cngMarket</string>
+    <string name="new_category">ایجاد دسته بندی جدید</string>
+    <string name="new_product">ایجاد محصول جدید</string>
+    <string name="new_article">ایجاد مقاله جدید</string>
+    <string name="new_middle_category">ایجاد دسته بندی میانی جدید</string>
+</resources>

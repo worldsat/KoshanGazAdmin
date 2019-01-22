@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/croping_image"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#adadad"
+    android:orientation="vertical"
+    tools:context="ir.koshangas.pasargad.croping_image">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
+
+        <com.theartofdev.edmodo.cropper.CropImageView xmlns:custom="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cropImageView"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:cropAspectRatioX="4"
+            app:cropAspectRatioY="4"
+            app:cropFixAspectRatio="true"
+            app:cropGuidelines="on"
+            app:cropInitialCropWindowPaddingRatio="0"
+
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="?attr/colorButtonNormal"
+            android:text="انتخاب مجدد عکس"
+            android:textColor="@color/blue" />
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@color/darkBlue"
+            android:text="ذخیره و ادامه"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

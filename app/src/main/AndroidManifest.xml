@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ir.koshangas.pasargad">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="ir.koshangas.pasargad.AppController"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="ir.koshangas.pasargad.MainActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name="ir.koshangas.pasargad.ChangePassword" />
+        <activity android:name="ir.koshangas.pasargad.category.Category" />
+        <activity android:name="ir.koshangas.pasargad.product.product" />
+        <activity android:name="ir.koshangas.pasargad.customer.Customer" />
+        <activity android:name="ir.koshangas.pasargad.category.New_Category" />
+        <activity android:name="ir.koshangas.pasargad.croping_image" />
+
+        <activity android:name="ir.koshangas.pasargad.product.New_Product" />
+        <activity android:name="ir.koshangas.pasargad.middleCategory.New_MiddleCategory" />
+        <activity android:name="ir.koshangas.pasargad.middleCategory.MiddleCategory" />
+        <activity android:name="ir.koshangas.pasargad.middleCategory2.New_MiddleCategory2" />
+        <activity android:name="ir.koshangas.pasargad.middleCategory2.MiddleCategory2" />
+        <activity android:name="ir.koshangas.pasargad.slider.New_Slider" />
+        <activity android:name="ir.koshangas.pasargad.login.EnterPasswordActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="ir.koshangas.pasargad.history.HistoryActivity" />
+        <activity android:name="ir.koshangas.pasargad.basket.BasketActivity" />
+        <activity android:name="ir.koshangas.pasargad.customer.newCustomerActivity" />
+
+        <activity android:name="ir.koshangas.pasargad.comment.CommentActivity">  </activity>
+    </application>
+
+</manifest>

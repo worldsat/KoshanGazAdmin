@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="darkBlue">#303f9f</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="toolbarColor">#6640ff</color>
+    <color name="black">#ff000000</color>
+    <color name="blue">#181cff</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#bf1515</color>
+    <color name="light_gray">#c7c7c7</color>
+    <color name="blue_sky">#1e88e5</color>
+    <color name="gray">#797979</color>
+</resources>

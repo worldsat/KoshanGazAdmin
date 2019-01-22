@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="5dp"
+    android:layout_weight="0.98"
+    android:orientation="vertical"
+
+    tools:ignore="MissingPrefix">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+
+        <ImageView
+            android:id="@+id/pic_show"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.3"
+            android:paddingLeft="5dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.3"
+
+                android:fontFamily="@font/sans_bold"
+                android:singleLine="true"
+                android:text="عنوان"
+                android:textColor="@color/black"
+                android:textDirection="rtl"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/code"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.2"
+                android:fontFamily="@font/sans_bold"
+                android:text="کد آگهی:"
+                android:textDirection="rtl"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/code2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.2"
+                android:fontFamily="@font/sans_bold"
+                android:text="کد آگهی:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textDirection="rtl"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/layout_price"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.3"
+
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/edit"
+
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.3"
+                    android:background="@drawable/button_corner_blue"
+                    android:fontFamily="@font/sans_bold"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:text="ویرایش"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textDirection="rtl"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/delete"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="0.3"
+                    android:background="@drawable/button_corner_red"
+                    android:fontFamily="@font/sans_bold"
+                    android:gravity="center"
+                    android:text="حذف"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/yourID2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:alpha="0.5"
+        android:background="@color/black" />
+
+</LinearLayout>
+
+
+
