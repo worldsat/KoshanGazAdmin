@@ -192,7 +192,7 @@ public class MiddleCategory2 extends AppCompatActivity {
                 tryagain_txt.setVisibility(View.GONE);
                 tryagain_btn.setVisibility(View.GONE);
 
-                datavolly.get_banners_middle(MiddleCategory2.this, "middle_category", recyclerView, tryagain_txt, tryagain_btn, progressBarOne, "1");
+                datavolly.get_banners_middle(MiddleCategory2.this, "middle_category2", recyclerView, tryagain_txt, tryagain_btn, progressBarOne, "1");
 
             } catch (Exception e) {
                 e.printStackTrace();

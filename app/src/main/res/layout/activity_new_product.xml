@@ -245,7 +245,7 @@
                         android:layout_gravity="right"
                         android:fontFamily="@font/sans_bold"
                         android:gravity="center_vertical"
-                        android:text="جشنواره"
+                        android:text="فروش ویژه"
                         android:visibility="visible" />
 
                 </LinearLayout>

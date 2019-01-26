@@ -257,10 +257,9 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                             if (Mode.equals("activity_product")) {
                                 volley.connect(context, "activity_product", "delete", false, "", "", "", IdItems.get(position), "");
-
                             } else if (Mode.equals("activity_category")) {
                                 volley.connect(context, "activity_category", "delete", false, "", "", "", IdItems.get(position), "");
-                            } else if (Mode.equals("middle_category")) {
+                            } else if (Mode.equals("middle_category")||Mode.equals("middle_category2")) {
                                 volley.connect(context, "activity_category", "delete", true, "", "", "", IdItems.get(position), "1");
 
                             }
