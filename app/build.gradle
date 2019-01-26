@@ -49,6 +49,6 @@ dependencies {
     implementation files('libs/poi-3.7.jar')
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.jjoe64:graphview:4.2.2'
-    implementation 'com.github.yongjhih.android-proguards:android-proguards-all:-SNAPSHOT'
+
     implementation 'com.karumi:dexter:4.2.0'
 }

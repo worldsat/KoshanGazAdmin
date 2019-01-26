@@ -142,7 +142,7 @@ public class New_Category extends AppCompatActivity {
                 .load(address.getString("image", ""))
                 .override(300, 300)
                 .error(R.mipmap.no_picture)
-                .centerCrop()
+//                .centerCrop()
                 .into(image_category);
         //  del_cat.setVisibility(View.VISIBLE);
     }

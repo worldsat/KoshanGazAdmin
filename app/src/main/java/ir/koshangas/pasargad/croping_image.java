@@ -103,7 +103,7 @@ public class croping_image extends AppCompatActivity {
                     SharedPreferences.Editor edit = pic_writer.edit();
                     String image = getStringImage(cropped);
 
-                    if (address.getString("page").equals("activity_category") || address.getString("page").equals("middle_category")) {
+                    if (address.getString("page").equals("activity_category") || address.getString("page").equals("middle_category") || address.getString("page").equals("middle_category2")) {
                         edit.putString("pic_category", image);
                         edit.putString("pic_category_edit", "true");
                     } else if (address.getString("page").equals("activity_product") || address.getString("page").equals("slider")) {

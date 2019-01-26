@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.system.ErrnoException;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,7 +90,7 @@ public class New_MiddleCategory2 extends AppCompatActivity {
 
         final SharedPreferences pic_reader = getApplicationContext().getSharedPreferences("picture", 0);
         final String pic_category = pic_reader.getString("pic_category", "");
-
+        Log.d("mohsenjamali", "onCreate: "+pic_category);
         del_cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +145,7 @@ public class New_MiddleCategory2 extends AppCompatActivity {
                 .load(address.getString("image", ""))
                 .override(300, 300)
                 .error(R.mipmap.no_picture)
-                .centerCrop()
+//                .centerCrop()
                 .into(image_category);
         //  del_cat.setVisibility(View.VISIBLE);
     }

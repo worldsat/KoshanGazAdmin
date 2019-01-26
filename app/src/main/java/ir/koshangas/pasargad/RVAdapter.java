@@ -147,7 +147,7 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .load(link)
                     .override(300, 300)
                     .error(R.mipmap.no_picture)
-                    .centerCrop()
+//                    .centerCrop()
                     .into(((MyViewHolder) holder).pic);
             //end glide
 

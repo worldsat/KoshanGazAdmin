@@ -140,7 +140,7 @@ public class getProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     .load(link)
                     .override(300, 300)
                     .error(R.mipmap.no_picture)
-                    .centerCrop()
+//                    .centerCrop()
                     .into(((MyViewHolder) holder).pic);
             //end glide
 

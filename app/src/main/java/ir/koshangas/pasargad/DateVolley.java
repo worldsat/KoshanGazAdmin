@@ -230,7 +230,7 @@ public class DateVolley {
                             }else{
                                 params.put("parent_id", "0");
                             }
-                            Log.i("mohsenjamali", "CAT: " +" "+band);
+                            Log.i("mohsenjamali", "CAT: " +" "+picture);
                         }
                         break;
                     case "update":
