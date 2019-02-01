@@ -73,6 +73,7 @@ public class DateVolley {
     private static List<String> Image5Items = new ArrayList<>();
     private static List<String> Image6Items = new ArrayList<>();
     private static List<String> OtherImageItems = new ArrayList<>();
+    private static List<String> ShowPrice = new ArrayList<>();
 
     private String url;
     private int rq;
@@ -289,7 +290,7 @@ public class DateVolley {
         requestQueue.add(stringRequest);
     }
 
-    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special, final String price, final String discount, final String votes) {
+    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special ,final String ShowPrice,final String price, final String discount, final String votes) {
 
         wait = new MaterialDialog.Builder(context)
                 .cancelable(false)
@@ -401,6 +402,7 @@ public class DateVolley {
                         params.put("category_id", id);
                         params.put("isAvailable", available);
                         params.put("special", special);
+                        params.put("ShowPrice", ShowPrice);
 
                         //   Log.i("mohsenjamali", "getParams: " + id + " " + pic_reader.getString("pic0", "nothing to show"));
 
@@ -444,6 +446,7 @@ public class DateVolley {
                         params.put("category_id", id);
                         params.put("isAvailable", available);
                         params.put("special", special);
+                        params.put("ShowPrice", ShowPrice);
 
                         //  Log.i("mohsenjamali", "update: " + pic_reader.getString("pic2", "nothing to show"));
                         //  SharedPreferences pic_database = context.getSharedPreferences("pic_database", 0);
@@ -629,6 +632,7 @@ public class DateVolley {
                             Image5Items.clear();
                             Image6Items.clear();
                             OtherImageItems.clear();
+                            ShowPrice.clear();
 
                             JSONObject jsonRootObject = new JSONObject(response);
                             JSONArray array2 = jsonRootObject.optJSONArray("data");
@@ -681,7 +685,7 @@ public class DateVolley {
                                     CategoryItems.add(person.getString("Category_id"));
                                     AvailableItems.add(person.getString("Available"));
                                     SpecialItems.add(person.getString("Special"));
-
+                                    ShowPrice.add(person.getString("ShowPrice"));
                                 } else {
                                     String image = "";
                                     String description = "";
@@ -699,10 +703,12 @@ public class DateVolley {
                                     jsonResponseCategory = category_id;
                                     jsonResponseAvailable = available;
 
+
                                     AvailableItems.add(jsonResponseAvailable);
                                     NameItems.add(jsonResponseName);
                                     ImageItems.add(jsonResponseImage);
                                     IdItems.add(jsonResponseId);
+
                                     DescriptionItems.add(jsonResponseDescription);
                                     CategoryItems.add(jsonResponseCategory);
                                     ParentItems.add("");
@@ -713,7 +719,7 @@ public class DateVolley {
                             try {
                                 recyclerViewlist.setLayoutManager(new LinearLayoutManager(context));
                                 if (Mode.equals("activity_product")) {
-                                    ad2 = new getProductsAdapter(context, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, recyclerViewlist);
+                                    ad2 = new getProductsAdapter(context,ShowPrice, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, recyclerViewlist);
                                     recyclerViewlist.setAdapter(ad2);
                                 } else {
                                     ad = new RVAdapter(context, Mode, NameItems, IdItems, ParentItems, ImageItems, DescriptionItems, CategoryItems, AvailableItems, recyclerViewlist);

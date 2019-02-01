@@ -46,8 +46,8 @@ public class New_Product extends AppCompatActivity {
     private Bundle address;
     private SharedPreferences pic_reader;
     private String[] picReader = new String[7];
-    private SwitchCompat switchAvailable, switchSpecial;
-    private String switch_number = "1", switch_special = "0";
+    private SwitchCompat switchAvailable, switchSpecial,switchShowPrice;
+    private String switch_number = "1", switch_special = "0",switch_ShowPrice="1";
     private SharedPreferences pic_database;
     private ImageView[] del = new ImageView[7];
     private DateVolley volley;
@@ -91,6 +91,7 @@ public class New_Product extends AppCompatActivity {
         pic_database = getApplicationContext().getSharedPreferences("pic_database", 0);
         switchAvailable = findViewById(R.id.switchPicture);
         switchSpecial = findViewById(R.id.switchSpecial);
+        switchShowPrice = findViewById(R.id.switchShowPrice);
 
         if (name_edt.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -130,19 +131,24 @@ public class New_Product extends AppCompatActivity {
                         switch_special = "0";
                     }
 
+                    if (switchShowPrice.isChecked()) {
+                        switch_ShowPrice = "1";
+                    } else {
+                        switch_ShowPrice = "0";
+                    }
                     if (address.getString("is_edit", "nothing").equals("true")) {
                         // Log.i("mohsenjamali", "onClick: 1");
-                        volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special,
+                        volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special,switch_ShowPrice,
                                 price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString());
                         Delete_image(address.getString("id"));
                     } else if (pic_reader.getString("Editable?", "nothing to show").equals("yes")) {
                         // Log.i("mohsenjamali", "onClick: 2");
                         id = pic_reader.getString("id", " ");
-                        volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), id, switch_number, switch_special
+                        volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), id, switch_number, switch_special,switch_ShowPrice
                                 , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString());
                         Delete_image(id);
                     } else {
-                        volley.connect_product(New_Product.this, "activity_product", "send", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special
+                        volley.connect_product(New_Product.this, "activity_product", "send", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special,switch_ShowPrice
                                 , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString());
                     }
 
@@ -247,6 +253,11 @@ public class New_Product extends AppCompatActivity {
             switchSpecial.setChecked(true);
         } else if (address.getString("special", "").equals("0")) {
             switchSpecial.setChecked(false);
+        }
+        if (address.getString("ShowPrice", "").equals("1")) {
+            switchShowPrice.setChecked(true);
+        } else if (address.getString("ShowPrice", "").equals("0")) {
+            switchShowPrice.setChecked(false);
         }
         // Log.i("mohsenjamali", "mohsen4: " + address.getString("isAvailable", ""));
 
@@ -388,6 +399,11 @@ public class New_Product extends AppCompatActivity {
         } else {
             edit.putString("special", "0");
         }
+        if (switchShowPrice.isChecked()) {
+            edit.putString("ShowPrice", "1");
+        } else {
+            edit.putString("ShowPrice", "0");
+        }
         edit.apply();
         // Log.i("mohsenjamali", "mohsen2: " + switchAvailable.isChecked());
     }
@@ -425,6 +441,11 @@ public class New_Product extends AppCompatActivity {
             switchSpecial.setChecked(true);
         } else if (pic_reader.getString("special", " ").equals("0")) {
             switchSpecial.setChecked(false);
+        }
+        if (pic_reader.getString("ShowPrice", " ").equals("1")) {
+            switchShowPrice.setChecked(true);
+        } else if (pic_reader.getString("ShowPrice", " ").equals("0")) {
+            switchShowPrice.setChecked(false);
         }
         //  Log.i("mohsenjamali", "mohsen3: " + pic_reader.getString("isAvailable", " "));
     }
