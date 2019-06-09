@@ -42,7 +42,7 @@ import ir.koshangas.pasargad.croping_image;
 
 public class New_Product extends AppCompatActivity {
     private Uri mCropImageUri;
-    private EditText name_edt, description_edt, id_edt, price_edt, discount_edt, votes_edt;
+    private EditText name_edt, description_edt, id_edt, price_edt, discount_edt, votes_edt,olaviat_edt;
     private Bundle address;
     private SharedPreferences pic_reader;
     private String[] picReader = new String[7];
@@ -83,6 +83,7 @@ public class New_Product extends AppCompatActivity {
         price_edt = findViewById(R.id.price_edt);
         discount_edt = findViewById(R.id.discount_edt);
         votes_edt = findViewById(R.id.votes_edt);
+        olaviat_edt = findViewById(R.id.olaviat_edt);
 
         id = id_edt.getText().toString();
 
@@ -139,17 +140,17 @@ public class New_Product extends AppCompatActivity {
                     if (address.getString("is_edit", "nothing").equals("true")) {
                         // Log.i("mohsenjamali", "onClick: 1");
                         volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special,switch_ShowPrice,
-                                price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString());
+                                price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString());
                         Delete_image(address.getString("id"));
                     } else if (pic_reader.getString("Editable?", "nothing to show").equals("yes")) {
                         // Log.i("mohsenjamali", "onClick: 2");
                         id = pic_reader.getString("id", " ");
                         volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), id, switch_number, switch_special,switch_ShowPrice
-                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString());
+                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString());
                         Delete_image(id);
                     } else {
                         volley.connect_product(New_Product.this, "activity_product", "send", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special,switch_ShowPrice
-                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString());
+                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString());
                     }
 
                 } else {
@@ -243,6 +244,7 @@ public class New_Product extends AppCompatActivity {
         price_edt.setText(address.getString("price", ""));
         votes_edt.setText(address.getString("votes", ""));
         discount_edt.setText(address.getString("discount", ""));
+        olaviat_edt.setText(address.getString("olaviat", ""));
 
         if (address.getString("isAvailable", "").equals("1")) {
             switchAvailable.setChecked(true);
@@ -388,6 +390,9 @@ public class New_Product extends AppCompatActivity {
         if (!discount_edt.getText().toString().isEmpty()) {
             edit.putString("discount", discount_edt.getText().toString());
         }
+        if (!olaviat_edt.getText().toString().isEmpty()) {
+            edit.putString("olaviat", olaviat_edt.getText().toString());
+        }
 
         if (switchAvailable.isChecked()) {
             edit.putString("isAvailable", "1");
@@ -422,7 +427,9 @@ public class New_Product extends AppCompatActivity {
         if (!pic_reader.getString("price", " ").equals(" ")) {
             price_edt.setText(pic_reader.getString("price", " "));
         }
-
+        if (!pic_reader.getString("olaviat", " ").equals(" ")) {
+            olaviat_edt.setText(pic_reader.getString("olaviat", " "));
+        }
         if (!pic_reader.getString("votes", " ").equals(" ")) {
             votes_edt.setText(pic_reader.getString("votes", " "));
         }

@@ -201,7 +201,7 @@ public class DateVolley {
                     public void onErrorResponse(VolleyError e) {
                         wait.dismiss();
                         Toast.makeText(context, "خطایی پیش آمده است !! لطفا لحظاتی دیگر تلاش فرمائید", Toast.LENGTH_LONG).show();
-                        Log.i("mohsenjamali", "onErrorResponse: " +e);
+                        Log.i("mohsenjamali", "onErrorResponse: " + e);
 
                         // onErrorResponse2(error, context);
                     }
@@ -228,10 +228,10 @@ public class DateVolley {
                             if (Middle) {
                                 params.put("parent_id", cat_id);
                                 Log.i("mohsenjamali", "middle_send: " + cat_id + " " + picture);
-                            }else{
+                            } else {
                                 params.put("parent_id", "0");
                             }
-                            Log.i("mohsenjamali", "CAT: " +" "+picture);
+                            Log.i("mohsenjamali", "CAT: " + " " + picture);
                         }
                         break;
                     case "update":
@@ -290,7 +290,7 @@ public class DateVolley {
         requestQueue.add(stringRequest);
     }
 
-    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special ,final String ShowPrice,final String price, final String discount, final String votes) {
+    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special, final String ShowPrice, final String price, final String discount, final String votes, final String olaviat) {
 
         wait = new MaterialDialog.Builder(context)
                 .cancelable(false)
@@ -385,6 +385,7 @@ public class DateVolley {
                         params.put("price", price);
                         params.put("votes", votes);
                         params.put("discount", discount);
+                        params.put("olaviat", olaviat);
 
 
                         if (pic_reader.getString("pic0", "nothing to show").compareTo(nothing) != 0
@@ -429,7 +430,7 @@ public class DateVolley {
                         params.put("price", price);
                         params.put("votes", votes);
                         params.put("discount", discount);
-
+                        params.put("olaviat", olaviat);
 
                         if (pic_reader.getString("pic0", "nothing to show").compareTo(nothing) != 0
                                 || pic_reader.getString("pic0", "nothing to show").equals("null")) {
@@ -719,7 +720,7 @@ public class DateVolley {
                             try {
                                 recyclerViewlist.setLayoutManager(new LinearLayoutManager(context));
                                 if (Mode.equals("activity_product")) {
-                                    ad2 = new getProductsAdapter(context,ShowPrice, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, recyclerViewlist);
+                                    ad2 = new getProductsAdapter(context, ShowPrice, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, recyclerViewlist);
                                     recyclerViewlist.setAdapter(ad2);
                                 } else {
                                     ad = new RVAdapter(context, Mode, NameItems, IdItems, ParentItems, ImageItems, DescriptionItems, CategoryItems, AvailableItems, recyclerViewlist);
