@@ -74,6 +74,7 @@ public class DateVolley {
     private static List<String> Image6Items = new ArrayList<>();
     private static List<String> OtherImageItems = new ArrayList<>();
     private static List<String> ShowPrice = new ArrayList<>();
+    private static List<String> olaviat = new ArrayList<>();
 
     private String url;
     private int rq;
@@ -634,6 +635,7 @@ public class DateVolley {
                             Image6Items.clear();
                             OtherImageItems.clear();
                             ShowPrice.clear();
+                            olaviat.clear();
 
                             JSONObject jsonRootObject = new JSONObject(response);
                             JSONArray array2 = jsonRootObject.optJSONArray("data");
@@ -687,6 +689,7 @@ public class DateVolley {
                                     AvailableItems.add(person.getString("Available"));
                                     SpecialItems.add(person.getString("Special"));
                                     ShowPrice.add(person.getString("ShowPrice"));
+                                    olaviat.add(person.getString("olaviat"));
                                 } else {
                                     String image = "";
                                     String description = "";
@@ -705,13 +708,16 @@ public class DateVolley {
                                     jsonResponseAvailable = available;
 
 
+
                                     AvailableItems.add(jsonResponseAvailable);
                                     NameItems.add(jsonResponseName);
                                     ImageItems.add(jsonResponseImage);
                                     IdItems.add(jsonResponseId);
 
+
                                     DescriptionItems.add(jsonResponseDescription);
                                     CategoryItems.add(jsonResponseCategory);
+                                    ParentItems.add("");
                                     ParentItems.add("");
                                 }
                                 //  Log.i("mohsenjamali", "ItemAdd: " + jsonResponseName + " " + person.getString("name"));
@@ -720,7 +726,7 @@ public class DateVolley {
                             try {
                                 recyclerViewlist.setLayoutManager(new LinearLayoutManager(context));
                                 if (Mode.equals("activity_product")) {
-                                    ad2 = new getProductsAdapter(context, ShowPrice, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, recyclerViewlist);
+                                    ad2 = new getProductsAdapter(context, ShowPrice,olaviat, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, recyclerViewlist);
                                     recyclerViewlist.setAdapter(ad2);
                                 } else {
                                     ad = new RVAdapter(context, Mode, NameItems, IdItems, ParentItems, ImageItems, DescriptionItems, CategoryItems, AvailableItems, recyclerViewlist);

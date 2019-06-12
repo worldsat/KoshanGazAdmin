@@ -207,7 +207,7 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:fontFamily="@font/sans_bold"
-                        android:hint="اولویت از 1 تا 10"
+                        android:hint="اولویت از 0 تا 10"
                         android:inputType="number"
                         android:maxLength="50"
                         android:textDirection="rtl"
