@@ -18,6 +18,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.system.ErrnoException;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
@@ -42,7 +44,7 @@ import ir.koshangas.pasargad.croping_image;
 
 public class New_Product extends AppCompatActivity {
     private Uri mCropImageUri;
-    private EditText name_edt, description_edt, id_edt, price_edt, discount_edt, votes_edt,olaviat_edt;
+    private EditText name_edt, description_edt, id_edt, price_edt, discount_edt, votes_edt, olaviat_edt, percent_edt;
     private Bundle address;
     private SharedPreferences pic_reader;
     private String[] picReader = new String[7];
@@ -51,6 +53,7 @@ public class New_Product extends AppCompatActivity {
     private SharedPreferences pic_database;
     private ImageView[] del = new ImageView[7];
     private DateVolley volley;
+
     String id = "23";
     private ImageView[] upload_image = new ImageView[7];
 
@@ -84,7 +87,7 @@ public class New_Product extends AppCompatActivity {
         discount_edt = findViewById(R.id.discount_edt);
         votes_edt = findViewById(R.id.votes_edt);
         olaviat_edt = findViewById(R.id.olaviat_edt);
-
+        percent_edt = findViewById(R.id.percent_edt);
         id = id_edt.getText().toString();
 
         Button send_cat_btn = findViewById(R.id.send_cat_btn);
@@ -112,7 +115,40 @@ public class New_Product extends AppCompatActivity {
 
         }
 
+        percent_edt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence percentDiscount, int start, int before, int count) {
+
+                try {
+                    if (!discount_edt.getText().toString().isEmpty()) {
+                        if (!percent_edt.getText().toString().isEmpty()) {
+                            int price1 = Integer.valueOf(discount_edt.getText().toString());
+                            int percent = Integer.valueOf(percentDiscount.toString());
+                            int finalPrice = (price1)-(price1 * percent) / 100;
+                            price_edt.setText(String.valueOf(finalPrice));
+                        }
+                    } else {
+                        Toast.makeText(New_Product.this, "لطفا قیمت بدون تخفیف رو وارد نمائید", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (Exception e) {
+                    Toast.makeText(New_Product.this, "خطا در محاسبه تخفیف", Toast.LENGTH_SHORT).show();
+                    percent_edt.setText("");
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         pic_reader = getApplicationContext().getSharedPreferences("picture", 0);
 
         send_cat_btn.setOnClickListener(new View.OnClickListener() {
@@ -140,17 +176,17 @@ public class New_Product extends AppCompatActivity {
                     if (address.getString("is_edit", "nothing").equals("true")) {
                         // Log.i("mohsenjamali", "onClick: 1");
                         volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special,switch_ShowPrice,
-                                price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString());
+                                price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString(),percent_edt.getText().toString());
                         Delete_image(address.getString("id"));
                     } else if (pic_reader.getString("Editable?", "nothing to show").equals("yes")) {
                         // Log.i("mohsenjamali", "onClick: 2");
                         id = pic_reader.getString("id", " ");
                         volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), id, switch_number, switch_special,switch_ShowPrice
-                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString());
+                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString(),percent_edt.getText().toString());
                         Delete_image(id);
                     } else {
                         volley.connect_product(New_Product.this, "activity_product", "send", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special,switch_ShowPrice
-                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString());
+                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString(),percent_edt.getText().toString());
                     }
 
                 } else {
@@ -245,6 +281,18 @@ public class New_Product extends AppCompatActivity {
         votes_edt.setText(address.getString("votes", ""));
         discount_edt.setText(address.getString("discount", ""));
         olaviat_edt.setText(address.getString("olaviat", ""));
+        percent_edt.setText(address.getString("percentDiscount", ""));
+
+//        try {
+//            int noTakhfifPrice = Integer.valueOf(discount_edt.getText().toString());
+//            int finalPrice = Integer.valueOf(price_edt.getText().toString());
+//            int ekhtelaf = noTakhfifPrice - finalPrice;
+//            int percent = (ekhtelaf * 100) / noTakhfifPrice;
+//            percent_edt.setText(String.valueOf(percent));
+//
+//        } catch (Exception e) {
+//            Toast.makeText(this, "عدم محاسبه تخفیف", Toast.LENGTH_SHORT).show();
+//        }
 
         if (address.getString("isAvailable", "").equals("1")) {
             switchAvailable.setChecked(true);
@@ -393,6 +441,9 @@ public class New_Product extends AppCompatActivity {
         if (!olaviat_edt.getText().toString().isEmpty()) {
             edit.putString("olaviat", olaviat_edt.getText().toString());
         }
+        if (!percent_edt.getText().toString().isEmpty()) {
+            edit.putString("percentDiscount", percent_edt.getText().toString());
+        }
 
         if (switchAvailable.isChecked()) {
             edit.putString("isAvailable", "1");
@@ -437,7 +488,9 @@ public class New_Product extends AppCompatActivity {
         if (!pic_reader.getString("discount", " ").equals(" ")) {
             discount_edt.setText(pic_reader.getString("discount", " "));
         }
-
+        if (!pic_reader.getString("percentDiscount", " ").equals(" ")) {
+            percent_edt.setText(pic_reader.getString("percentDiscount", " "));
+        }
         if (pic_reader.getString("isAvailable", " ").equals("1")) {
             switchAvailable.setChecked(true);
         } else if (pic_reader.getString("isAvailable", " ").equals("0")) {

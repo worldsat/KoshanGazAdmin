@@ -63,7 +63,7 @@ public class Category extends AppCompatActivity {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                datavolly.get_banners(Category.this, "activity_category", recyclerView, tryagain_txt, tryagain_btn, progressBarOne);
+                datavolly.get_banners(Category.this, "activity_category","", recyclerView, tryagain_txt, tryagain_btn, progressBarOne,null);
 
                 //Download data from net and update list
                 refreshLayout.setRefreshing(false);
@@ -98,7 +98,7 @@ public class Category extends AppCompatActivity {
 
         datavolly = new DateVolley();
         // datavolly.connect(MiddleCategory.this,"activity_product","get","test");
-        datavolly.get_banners(Category.this, "activity_category", recyclerView, tryagain_txt, tryagain_btn, progressBarOne);
+        datavolly.get_banners(Category.this, "activity_category","", recyclerView, tryagain_txt, tryagain_btn, progressBarOne,null);
         TextView new_cat = findViewById(R.id.new_cat);
         new_cat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,7 +189,7 @@ public class Category extends AppCompatActivity {
                 tryagain_txt.setVisibility(View.GONE);
                 tryagain_btn.setVisibility(View.GONE);
 
-                datavolly.get_banners(Category.this, "activity_category", recyclerView, tryagain_txt, tryagain_btn, progressBarOne);
+                datavolly.get_banners(Category.this, "activity_category","", recyclerView, tryagain_txt, tryagain_btn, progressBarOne,null);
 
             } catch (Exception e) {
                 e.printStackTrace();

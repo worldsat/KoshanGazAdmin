@@ -5,12 +5,14 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
 import ir.koshangas.pasargad.R;
+import ir.koshangas.pasargad.basket.domain.basketDomain;
 
 public class BasketActivity extends AppCompatActivity {
     private DecimalFormat formatter = new DecimalFormat("###,###,###,###");
@@ -27,6 +29,7 @@ public class BasketActivity extends AppCompatActivity {
         RecyclerView recyclerViewlist = findViewById(R.id.RecyclerView);
         TextView emptyText = findViewById(R.id.emptyText);
         emptyText.setVisibility(View.GONE);
+        Button excleBtn = findViewById(R.id.excelBtn2);
 
         TextView dateShow = findViewById(R.id.date_show);
         TextView mobileShow = findViewById(R.id.mobile_show);
@@ -38,6 +41,7 @@ public class BasketActivity extends AppCompatActivity {
 
 
         if (address != null) {
+            basketDomain basketDomain = new basketDomain();
             dateShow.setText(address.getString("DateItems", "0"));
             mobileShow.setText(address.getString("UserItems", "0"));
             nameShow.setText(address.getString("NameCustomerItems", "0"));
@@ -48,12 +52,19 @@ public class BasketActivity extends AppCompatActivity {
             paymentShow.setText(Payment(address.getString("PaymentMethodItems", "0")));
             postShow.setText(Post(address.getString("SendMethodItems", "0")));
 
+            basketDomain.setDateShow(address.getString("DateItems", "0"));
+            basketDomain.setFactorShow(address.getString("FactorItems", "0"));
+            basketDomain.setMobileShow(address.getString("UserItems", "0"));
+            basketDomain.setNameShow(address.getString("NameCustomerItems", "0"));
+            basketDomain.setTotalShow(str3);
+            basketDomain.setPaymentShow(Payment(address.getString("PaymentMethodItems", "0")));
+
 
             String factor = address.getString("FactorItems", "0");
             String mobile = address.getString("UserItems", "0");
 
             getBasketItems historyBasket = new getBasketItems();
-            historyBasket.get_Items(BasketActivity.this, progressBar, recyclerViewlist, emptyText, BasketLayout, factor, mobile);
+            historyBasket.get_Items(BasketActivity.this, excleBtn,basketDomain, progressBar, recyclerViewlist, emptyText, BasketLayout, factor, mobile);
         }
     }
 

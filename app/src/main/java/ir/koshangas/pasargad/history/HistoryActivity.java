@@ -38,6 +38,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Collections;
 import java.util.List;
 
 import ir.koshangas.pasargad.MainActivity;
@@ -66,10 +67,10 @@ public class HistoryActivity extends AppCompatActivity {
 //
 //        if (token.Ok(getActivity())) {
         getHistoryBasket historyBasket = new getHistoryBasket();
-        historyBasket.get_Items(HistoryActivity.this, progressBar, recyclerViewlist, emptyText, BasketLayout);
+        historyBasket.get_Items(HistoryActivity.this, progressBar, recyclerViewlist, emptyText, BasketLayout,excelBtn);
 
-        getHistoryExcelBasket historyExcelBasket = new getHistoryExcelBasket();
-        historyExcelBasket.get_Items(HistoryActivity.this, progressBar, recyclerViewlist, emptyText, BasketLayout, excelBtn);
+//        getHistoryExcelBasket historyExcelBasket = new getHistoryExcelBasket();
+//        historyExcelBasket.get_Items(HistoryActivity.this, progressBar, recyclerViewlist, emptyText, BasketLayout, excelBtn);
 //        } else {
 //            emptyText.setVisibility(View.VISIBLE);
 //            setHiddenLayout(getActivity());
@@ -184,25 +185,31 @@ public class HistoryActivity extends AppCompatActivity {
         c.setCellValue("تاریخ");
         c.setCellStyle(cs);
         c = row.createCell(1);
-        c.setCellValue("شماره همراه");
+        c.setCellValue("نام ");
         c.setCellStyle(cs);
         c = row.createCell(2);
-        c.setCellValue("شماره فاکتور");
+        c.setCellValue("شماره همراه");
         c.setCellStyle(cs);
-//        c = row.createCell(3);
-//        c.setCellValue("نام کالا");
-//        c.setCellStyle(cs);
         c = row.createCell(3);
-        c.setCellValue("قیمت واحد");
+        c.setCellValue("شماره فاکتور مشتری");
         c.setCellStyle(cs);
         c = row.createCell(4);
-        c.setCellValue("تعداد خرید");
+        c.setCellValue("قیمت واحد");
         c.setCellStyle(cs);
         c = row.createCell(5);
+        c.setCellValue("تعداد خرید");
+        c.setCellStyle(cs);
+        c = row.createCell(6);
         c.setCellValue("جمع مبلغ خرید");
         c.setCellStyle(cs);
 
-
+        Collections.reverse(DateItems);
+        Collections.reverse(UserItems);
+        Collections.reverse(FactorItems);
+        Collections.reverse(PriceItems);
+        Collections.reverse(QtyItems);
+        Collections.reverse(TotalPriceIdItems);
+        Collections.reverse(NameItems);
         CellStyle cs2 = wb.createCellStyle();
         cs2.setFillForegroundColor(HSSFColor.LIGHT_ORANGE.index);
         cs2.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
@@ -216,21 +223,21 @@ public class HistoryActivity extends AppCompatActivity {
                 c.setCellValue("\u200F" + DateItems.get(i));
                 c.setCellStyle(cs2);
                 c = row2.createCell(1);
-                c.setCellValue("\u200F" + UserItems.get(i));
+                c.setCellValue("\u200F" + NameItems.get(i));
                 c.setCellStyle(cs2);
                 c = row2.createCell(2);
+                c.setCellValue("\u200F" + UserItems.get(i));
+                c.setCellStyle(cs2);
+                c = row2.createCell(3);
                 c.setCellValue("\u200F" + FactorItems.get(i));
                 c.setCellStyle(cs2);
-//                c = row2.createCell(3);
-//                c.setCellValue("\u200F" + NameItems.get(i));
-//                c.setCellStyle(cs2);
-                c = row2.createCell(3);
+                c = row2.createCell(4);
                 c.setCellValue("\u200F" + formatter.format(Long.valueOf(PriceItems.get(i))) + " تومان");
                 c.setCellStyle(cs2);
-                c = row2.createCell(4);
+                c = row2.createCell(5);
                 c.setCellValue("\u200F" + QtyItems.get(i));
                 c.setCellStyle(cs2);
-                c = row2.createCell(5);
+                c = row2.createCell(6);
                 c.setCellValue("\u200F" + formatter.format(Long.valueOf(TotalPriceIdItems.get(i))) + " تومان");
                 c.setCellStyle(cs2);
                 Log.i("mohsenjamali", "saveExcelFile: i=" + i + " from=" + from);

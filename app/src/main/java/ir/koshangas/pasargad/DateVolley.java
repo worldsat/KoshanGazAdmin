@@ -60,6 +60,7 @@ public class DateVolley {
     private static List<String> CityItems = new ArrayList<>();
     private static List<String> StateItems = new ArrayList<>();
     private static List<String> TellItems = new ArrayList<>();
+    private static List<String> PercentDiscountItems = new ArrayList<>();
 
 
     private static List<String> priceItems = new ArrayList<>();
@@ -291,7 +292,7 @@ public class DateVolley {
         requestQueue.add(stringRequest);
     }
 
-    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special, final String ShowPrice, final String price, final String discount, final String votes, final String olaviat) {
+    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special, final String ShowPrice, final String price, final String discount, final String votes, final String olaviat,final String percentDiscount) {
 
         wait = new MaterialDialog.Builder(context)
                 .cancelable(false)
@@ -385,6 +386,7 @@ public class DateVolley {
                         params.put("description", description);
                         params.put("price", price);
                         params.put("votes", votes);
+                        params.put("percentDiscount", percentDiscount);
                         params.put("discount", discount);
                         params.put("olaviat", olaviat);
 
@@ -432,6 +434,7 @@ public class DateVolley {
                         params.put("votes", votes);
                         params.put("discount", discount);
                         params.put("olaviat", olaviat);
+                        params.put("percentDiscount", percentDiscount);
 
                         if (pic_reader.getString("pic0", "nothing to show").compareTo(nothing) != 0
                                 || pic_reader.getString("pic0", "nothing to show").equals("null")) {
@@ -585,7 +588,7 @@ public class DateVolley {
         Toast.makeText(context, toastString, Toast.LENGTH_LONG).show();
     }
 
-    public void get_banners(final Context context, final String Mode, final RecyclerView recyclerViewlist, final TextView tryagain_txt, final Button tryagain_btn, final ProgressBar progressBarOne) {
+    public void get_banners(final Context context, final String Mode, final String search, final RecyclerView recyclerViewlist, final TextView tryagain_txt, final Button tryagain_btn, final ProgressBar progressBarOne, final TextView ExcelBtn) {
         String urlJsonArray = "";
 
         if (Mode.equals("activity_category")) {
@@ -598,7 +601,9 @@ public class DateVolley {
         if (Mode.equals("middle_category")) {
             urlJsonArray = "http://www.koshangaspasargad.ir/koshangas/admin/get_category.php";
         }
-
+        if (Mode.equals("search_product")) {
+            urlJsonArray = "http://www.koshangaspasargad.ir/koshangas/admin/search_product.php";
+        }
         recyclerViewlist.setVisibility(View.GONE);
         progressBarOne.setVisibility(View.VISIBLE);
         StringRequest req = new StringRequest(Request.Method.POST, urlJsonArray,
@@ -618,6 +623,7 @@ public class DateVolley {
                             DescriptionItems.clear();
                             AvailableItems.clear();
                             SpecialItems.clear();
+                            PercentDiscountItems.clear();
 
 
                             DiscountItems.clear();
@@ -643,7 +649,7 @@ public class DateVolley {
                             for (int i = 0; i < array2.length(); i++) {
 
                                 JSONObject person = array2.getJSONObject(i);
-                                if (Mode.equals("activity_product")) {
+                                if (Mode.equals("activity_product") || Mode.equals("search_product")) {
 
                                     String images[] = new String[7];
                                     SharedPreferences pic_database = context.getSharedPreferences("pic_database", 0);
@@ -675,7 +681,7 @@ public class DateVolley {
                                 jsonResponseAvailable = "";
 
 
-                                if (Mode.equals("activity_product")) {
+                                if (Mode.equals("activity_product") || Mode.equals("search_product")) {
 
 
                                     DiscountItems.add(person.getString("Discount"));
@@ -690,6 +696,7 @@ public class DateVolley {
                                     SpecialItems.add(person.getString("Special"));
                                     ShowPrice.add(person.getString("ShowPrice"));
                                     olaviat.add(person.getString("olaviat"));
+                                    PercentDiscountItems.add(person.getString("PercentDiscount"));
                                 } else {
                                     String image = "";
                                     String description = "";
@@ -708,7 +715,6 @@ public class DateVolley {
                                     jsonResponseAvailable = available;
 
 
-
                                     AvailableItems.add(jsonResponseAvailable);
                                     NameItems.add(jsonResponseName);
                                     ImageItems.add(jsonResponseImage);
@@ -723,10 +729,19 @@ public class DateVolley {
                                 //  Log.i("mohsenjamali", "ItemAdd: " + jsonResponseName + " " + person.getString("name"));
 
                             }
+                            if (Mode.equals("activity_product") || Mode.equals("search_product")) {
+                                ExcelBtn.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        product product = new product();
+                                        product.saveExcelFile(context, NameItems, DescriptionItems, priceItems, ShowPrice);
+                                    }
+                                });
+                            }
                             try {
                                 recyclerViewlist.setLayoutManager(new LinearLayoutManager(context));
-                                if (Mode.equals("activity_product")) {
-                                    ad2 = new getProductsAdapter(context, ShowPrice,olaviat, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, recyclerViewlist);
+                                if (Mode.equals("activity_product") || Mode.equals("search_product")) {
+                                    ad2 = new getProductsAdapter(context, ShowPrice,olaviat, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems,PercentDiscountItems, recyclerViewlist);
                                     recyclerViewlist.setAdapter(ad2);
                                 } else {
                                     ad = new RVAdapter(context, Mode, NameItems, IdItems, ParentItems, ImageItems, DescriptionItems, CategoryItems, AvailableItems, recyclerViewlist);
@@ -908,6 +923,8 @@ public class DateVolley {
 
                 MyData.put("page", "2");
                 MyData.put("parent_id", "0");
+                MyData.put("search", search);
+
                 return MyData;
             }
         };

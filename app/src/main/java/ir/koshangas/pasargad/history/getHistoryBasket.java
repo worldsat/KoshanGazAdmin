@@ -7,10 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import ir.koshangas.pasargad.MiladiToShamsi;
+import ir.koshangas.pasargad.R;
 
 
 public class getHistoryBasket {
@@ -52,10 +56,11 @@ public class getHistoryBasket {
     private static List<String> NameCustomerItems = new ArrayList<>();
 
     private static List<String> NumberItems = new ArrayList<>();
-
+    int from, to;
+    private MaterialDialog wait;
     private DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 
-    public void get_Items(final Context context, final ProgressBar ProgressBar, final RecyclerView recyclerViewlist, final TextView emptyText, final ConstraintLayout BasketLayout) {
+    public void get_Items(final Context context, final ProgressBar ProgressBar, final RecyclerView recyclerViewlist, final TextView emptyText, final ConstraintLayout BasketLayout,Button excelBtn) {
 
         final SharedPreferences sp = context.getSharedPreferences("Token", 0);
         String urlJsonArray = "http://www.koshangaspasargad.ir/koshangas/admin/" + "getHistoryBasket.php";
@@ -191,7 +196,56 @@ public class getHistoryBasket {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
+        excelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wait = new MaterialDialog.Builder(context)
+                        .cancelable(false)
+                        .content("لطفا منتظر بمانید")
+                        .progress(true, 0)
+                        .build();
 
+
+                final MaterialDialog about = new MaterialDialog.Builder(context)
+                        .customView(R.layout.alert_excel, false)
+                        .autoDismiss(false)
+                        .build();
+                about.show();
+
+                Button BuildBtn = (Button) about.findViewById(R.id.buildExcel);
+
+                final EditText edtExcel1 = (EditText) about.findViewById(R.id.edtExcle1);
+                final EditText edtExcel2 = (EditText) about.findViewById(R.id.edtExcel2);
+
+                BuildBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        wait.show();
+                        if (edtExcel1.getText().length() > 0 && edtExcel2.getText().length() > 0) {
+                            int edt1 = Integer.valueOf(edtExcel1.getText().toString());
+                            int edt2 = Integer.valueOf(edtExcel2.getText().toString());
+
+                            if (edt1 < edt2) {
+                                from = edt1;
+                                to = edt2;
+                            } else if (edt1 > edt2) {
+                                from = edt2;
+                                to = edt1;
+                            } else {
+                                from = edt1;
+                                to = edt2;
+                            }
+                            HistoryActivity HistoryActivity = new HistoryActivity();
+                            HistoryActivity.saveExcelFile(context, "CNG Market.xls", from, to, DateItems, PriceItems, UserItems, NameItems, QtyItems, FactoreItems, TotalPriceIdItems);
+                        } else {
+                            Toast.makeText(context, "لطفا شماره ردیف رو وارد نمائید", Toast.LENGTH_SHORT).show();
+                        }
+                        wait.dismiss();
+                        about.dismiss();
+                    }
+                });
+            }
+        });
 
     }
 
