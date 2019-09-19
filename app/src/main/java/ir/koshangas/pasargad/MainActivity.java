@@ -14,6 +14,7 @@ import ir.koshangas.pasargad.category.Category;
 import ir.koshangas.pasargad.comment.CommentActivity;
 import ir.koshangas.pasargad.customer.Customer;
 import ir.koshangas.pasargad.history.HistoryActivity;
+import ir.koshangas.pasargad.login.EnterPasswordActivity;
 import ir.koshangas.pasargad.login.GetToken;
 import ir.koshangas.pasargad.middleCategory.MiddleCategory;
 import ir.koshangas.pasargad.middleCategory2.MiddleCategory2;
@@ -109,6 +110,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtn9(View v) {
         Intent intent = new Intent(MainActivity.this, CommentActivity.class);
+        MainActivity.this.startActivity(intent);
+    }
+    public void onBtn10(View v) {
+        Intent intent = new Intent(MainActivity.this, ChangePassword.class);
+        MainActivity.this.startActivity(intent);
+    }
+    public void onBtn11(View v) {
+        Intent intent = new Intent(MainActivity.this, EnterPasswordActivity.class);
         MainActivity.this.startActivity(intent);
     }
 

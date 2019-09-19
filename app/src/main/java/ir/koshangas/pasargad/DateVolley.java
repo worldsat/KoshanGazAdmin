@@ -36,7 +36,7 @@ import java.util.Map;
 
 import ir.koshangas.pasargad.category.Category;
 import ir.koshangas.pasargad.customer.Customer;
-import ir.koshangas.pasargad.login.GetToken;
+import ir.koshangas.pasargad.login.EnterPasswordActivity;
 import ir.koshangas.pasargad.middleCategory.MiddleCategory;
 import ir.koshangas.pasargad.middleCategory2.MiddleCategory2;
 import ir.koshangas.pasargad.product.getProductsAdapter;
@@ -292,7 +292,7 @@ public class DateVolley {
         requestQueue.add(stringRequest);
     }
 
-    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special, final String ShowPrice, final String price, final String discount, final String votes, final String olaviat,final String percentDiscount) {
+    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special, final String ShowPrice, final String price, final String discount, final String votes, final String olaviat, final String percentDiscount) {
 
         wait = new MaterialDialog.Builder(context)
                 .cancelable(false)
@@ -741,7 +741,7 @@ public class DateVolley {
                             try {
                                 recyclerViewlist.setLayoutManager(new LinearLayoutManager(context));
                                 if (Mode.equals("activity_product") || Mode.equals("search_product")) {
-                                    ad2 = new getProductsAdapter(context, ShowPrice,olaviat, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems,PercentDiscountItems, recyclerViewlist);
+                                    ad2 = new getProductsAdapter(context, ShowPrice, olaviat, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, PercentDiscountItems, recyclerViewlist);
                                     recyclerViewlist.setAdapter(ad2);
                                 } else {
                                     ad = new RVAdapter(context, Mode, NameItems, IdItems, ParentItems, ImageItems, DescriptionItems, CategoryItems, AvailableItems, recyclerViewlist);
@@ -1060,19 +1060,17 @@ public class DateVolley {
                 .progress(true, 0)
                 .build();
         wait.show();
-        String url = "http://ghomashe.com/api/changePassword";
+        String url = "http://www.koshangaspasargad.ir/koshangas/admin/update_user.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         wait.dismiss();
-                        try {
-                            GetToken Token = new GetToken();
-                            Token.connect(context, username, password);
-                        } catch (Exception e) {
-                            wait.dismiss();
-                            Log.i("mohsenjamali", "arrayerror: " + e.toString());
-                            Toast.makeText(context, "خطا در اتصال به سامانه 2", Toast.LENGTH_LONG).show();
+                        if (response.equals("ok")) {
+                            Toast.makeText(context, "تغییر با موفقیت انجام شد", Toast.LENGTH_SHORT).show();
+                            context.startActivity(new Intent(context, EnterPasswordActivity.class));
+                        } else {
+                            Toast.makeText(context, "خطا در انجام عملیات.لطفا با سرپرست سیستم تماس بگیرید", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -1091,8 +1089,8 @@ public class DateVolley {
                 Map<String, String> params = new HashMap<>();
                 // params.put("mobile", "0913");
                 // params.put("password", "123");
-                params.put("mobile", username);
-                params.put("password", password);
+                params.put("user", username);
+                params.put("pass", password);
 
                 return params;
             }
