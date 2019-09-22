@@ -48,8 +48,8 @@ public class New_Product extends AppCompatActivity {
     private Bundle address;
     private SharedPreferences pic_reader;
     private String[] picReader = new String[7];
-    private SwitchCompat switchAvailable, switchSpecial,switchShowPrice;
-    private String switch_number = "1", switch_special = "0",switch_ShowPrice="1";
+    private SwitchCompat switchAvailable, switchSpecial, switchShowPrice,switchNewProduct,switchKhadamat;
+    private String switch_number = "1", switch_special = "0", switch_ShowPrice = "1", switch_newProduct = "0", switch_khadamat = "0";
     private SharedPreferences pic_database;
     private ImageView[] del = new ImageView[7];
     private DateVolley volley;
@@ -96,6 +96,8 @@ public class New_Product extends AppCompatActivity {
         switchAvailable = findViewById(R.id.switchPicture);
         switchSpecial = findViewById(R.id.switchSpecial);
         switchShowPrice = findViewById(R.id.switchShowPrice);
+        switchNewProduct = findViewById(R.id.switchNewProduct);
+        switchKhadamat = findViewById(R.id.switchKhadamat);
 
         if (name_edt.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -129,7 +131,7 @@ public class New_Product extends AppCompatActivity {
                         if (!percent_edt.getText().toString().isEmpty()) {
                             int price1 = Integer.valueOf(discount_edt.getText().toString());
                             int percent = Integer.valueOf(percentDiscount.toString());
-                            int finalPrice = (price1)-(price1 * percent) / 100;
+                            int finalPrice = (price1) - (price1 * percent) / 100;
                             price_edt.setText(String.valueOf(finalPrice));
                         }
                     } else {
@@ -173,20 +175,30 @@ public class New_Product extends AppCompatActivity {
                     } else {
                         switch_ShowPrice = "0";
                     }
+                    if (switchNewProduct.isChecked()) {
+                        switch_newProduct = "1";
+                    } else {
+                        switch_newProduct = "0";
+                    }
+                    if (switchKhadamat.isChecked()) {
+                        switch_khadamat = "1";
+                    } else {
+                        switch_khadamat = "0";
+                    }
                     if (address.getString("is_edit", "nothing").equals("true")) {
                         // Log.i("mohsenjamali", "onClick: 1");
-                        volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special,switch_ShowPrice,
-                                price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString(),percent_edt.getText().toString());
+                        volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special, switch_ShowPrice,switch_newProduct,switch_khadamat
+                              ,  price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(), olaviat_edt.getText().toString(), percent_edt.getText().toString());
                         Delete_image(address.getString("id"));
                     } else if (pic_reader.getString("Editable?", "nothing to show").equals("yes")) {
                         // Log.i("mohsenjamali", "onClick: 2");
                         id = pic_reader.getString("id", " ");
-                        volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), id, switch_number, switch_special,switch_ShowPrice
-                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString(),percent_edt.getText().toString());
+                        volley.connect_product(New_Product.this, "activity_product", "update", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), id, switch_number, switch_special, switch_ShowPrice,switch_newProduct,switch_khadamat
+                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(), olaviat_edt.getText().toString(), percent_edt.getText().toString());
                         Delete_image(id);
                     } else {
-                        volley.connect_product(New_Product.this, "activity_product", "send", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special,switch_ShowPrice
-                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(),olaviat_edt.getText().toString(),percent_edt.getText().toString());
+                        volley.connect_product(New_Product.this, "activity_product", "send", description_edt.getText().toString(), name_edt.getText().toString(), id_edt.getText().toString(), address.getString("id"), switch_number, switch_special, switch_ShowPrice,switch_newProduct,switch_khadamat
+                                , price_edt.getText().toString(), discount_edt.getText().toString(), votes_edt.getText().toString(), olaviat_edt.getText().toString(), percent_edt.getText().toString());
                     }
 
                 } else {
@@ -309,6 +321,16 @@ public class New_Product extends AppCompatActivity {
         } else if (address.getString("ShowPrice", "").equals("0")) {
             switchShowPrice.setChecked(false);
         }
+        if (address.getString("ShowNewProduct", "").equals("1")) {
+            switchNewProduct.setChecked(true);
+        } else if (address.getString("ShowNewProduct", "").equals("0")) {
+            switchNewProduct.setChecked(false);
+        }
+        if (address.getString("ShowKhadamat", "").equals("1")) {
+            switchKhadamat.setChecked(true);
+        } else if (address.getString("ShowKhadamat", "").equals("0")) {
+            switchKhadamat.setChecked(false);
+        }
         // Log.i("mohsenjamali", "mohsen4: " + address.getString("isAvailable", ""));
 
     }
@@ -367,10 +389,10 @@ public class New_Product extends AppCompatActivity {
             String i_str = String.valueOf(i);
             if (!pic_reader.getString("pic" + i_str, "nothing to show").equals("nothing to show")) {
 
-                        Bitmap[] img_shared = new Bitmap[7];
-                        img_shared[i] = decodeBase64(pic_reader.getString("pic" + i_str, "nothing to show"));
-                        Glide.clear(upload_image[i]);
-                        upload_image[i].setImageBitmap(img_shared[i]);
+                Bitmap[] img_shared = new Bitmap[7];
+                img_shared[i] = decodeBase64(pic_reader.getString("pic" + i_str, "nothing to show"));
+                Glide.clear(upload_image[i]);
+                upload_image[i].setImageBitmap(img_shared[i]);
                 del[i].setVisibility(View.VISIBLE);
 
             }
@@ -460,6 +482,16 @@ public class New_Product extends AppCompatActivity {
         } else {
             edit.putString("ShowPrice", "0");
         }
+        if (switchNewProduct.isChecked()) {
+            edit.putString("ShowKhadamat", "1");
+        } else {
+            edit.putString("ShowKhadamat", "0");
+        }
+        if (switchKhadamat.isChecked()) {
+            edit.putString("ShowNewProduct", "1");
+        } else {
+            edit.putString("ShowNewProduct", "0");
+        }
         edit.apply();
         // Log.i("mohsenjamali", "mohsen2: " + switchAvailable.isChecked());
     }
@@ -506,6 +538,16 @@ public class New_Product extends AppCompatActivity {
             switchShowPrice.setChecked(true);
         } else if (pic_reader.getString("ShowPrice", " ").equals("0")) {
             switchShowPrice.setChecked(false);
+        }
+        if (pic_reader.getString("ShowKhadamat", " ").equals("1")) {
+            switchKhadamat.setChecked(true);
+        } else if (pic_reader.getString("ShowKhadamat", " ").equals("0")) {
+            switchKhadamat.setChecked(false);
+        }
+        if (pic_reader.getString("ShowNewProduct", " ").equals("1")) {
+            switchNewProduct.setChecked(true);
+        } else if (pic_reader.getString("ShowNewProduct", " ").equals("0")) {
+            switchNewProduct.setChecked(false);
         }
         //  Log.i("mohsenjamali", "mohsen3: " + pic_reader.getString("isAvailable", " "));
     }

@@ -332,6 +332,68 @@
                         android:layout_weight="0.5" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="200dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switchKhadamat"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="0.5"
+                        android:checked="true"
+                        android:theme="@style/MySwitch"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/specialSwith5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:fontFamily="@font/sans_bold"
+                        android:gravity="center_vertical"
+                        android:text="خدمات تعمیرات"
+                        android:visibility="visible"
+                        android:layout_weight="0.5" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="200dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switchNewProduct"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="0.5"
+                        android:checked="true"
+                        android:theme="@style/MySwitch"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/specialSwith3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:fontFamily="@font/sans_bold"
+                        android:gravity="center_vertical"
+                        android:text="نمایش در جدید ترین محصولات"
+                        android:visibility="visible"
+                        android:layout_weight="0.5" />
+
+                </LinearLayout>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

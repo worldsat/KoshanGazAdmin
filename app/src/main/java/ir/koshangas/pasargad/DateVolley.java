@@ -292,7 +292,7 @@ public class DateVolley {
         requestQueue.add(stringRequest);
     }
 
-    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special, final String ShowPrice, final String price, final String discount, final String votes, final String olaviat, final String percentDiscount) {
+    public void connect_product(final Context context, final String link, final String Mode, final String description, final String name_product, final String id, final String product_id, final String available, final String special, final String ShowPrice,final String showNewProduct,final String khadamat, final String price, final String discount, final String votes, final String olaviat, final String percentDiscount) {
 
         wait = new MaterialDialog.Builder(context)
                 .cancelable(false)
@@ -407,6 +407,8 @@ public class DateVolley {
                         params.put("isAvailable", available);
                         params.put("special", special);
                         params.put("ShowPrice", ShowPrice);
+                        params.put("showNewProduct", showNewProduct);
+                        params.put("khadamat", khadamat);
 
                         //   Log.i("mohsenjamali", "getParams: " + id + " " + pic_reader.getString("pic0", "nothing to show"));
 
@@ -452,7 +454,8 @@ public class DateVolley {
                         params.put("isAvailable", available);
                         params.put("special", special);
                         params.put("ShowPrice", ShowPrice);
-
+                        params.put("showNewProduct", showNewProduct);
+                        params.put("khadamat", khadamat);
                         //  Log.i("mohsenjamali", "update: " + pic_reader.getString("pic2", "nothing to show"));
                         //  SharedPreferences pic_database = context.getSharedPreferences("pic_database", 0);
                         //بررسی عکس ها برای ارسال
