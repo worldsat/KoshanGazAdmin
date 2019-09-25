@@ -76,6 +76,8 @@ public class DateVolley {
     private static List<String> OtherImageItems = new ArrayList<>();
     private static List<String> ShowPrice = new ArrayList<>();
     private static List<String> olaviat = new ArrayList<>();
+    private static List<String> khadamat = new ArrayList<>();
+    private static List<String> newList= new ArrayList<>();
 
     private String url;
     private int rq;
@@ -627,8 +629,8 @@ public class DateVolley {
                             AvailableItems.clear();
                             SpecialItems.clear();
                             PercentDiscountItems.clear();
-
-
+                            newList.clear();
+                            khadamat.clear();
                             DiscountItems.clear();
                             IdItems.clear();
                             DescriptionItems.clear();
@@ -700,6 +702,8 @@ public class DateVolley {
                                     ShowPrice.add(person.getString("ShowPrice"));
                                     olaviat.add(person.getString("olaviat"));
                                     PercentDiscountItems.add(person.getString("PercentDiscount"));
+                                    newList.add(person.getString("newList"));
+                                    khadamat.add(person.getString("khadamat"));
                                 } else {
                                     String image = "";
                                     String description = "";
@@ -744,7 +748,7 @@ public class DateVolley {
                             try {
                                 recyclerViewlist.setLayoutManager(new LinearLayoutManager(context));
                                 if (Mode.equals("activity_product") || Mode.equals("search_product")) {
-                                    ad2 = new getProductsAdapter(context, ShowPrice, olaviat, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, PercentDiscountItems, recyclerViewlist);
+                                    ad2 = new getProductsAdapter(context, ShowPrice, olaviat, DiscountItems, IdItems, DescriptionItems, NameItems, priceItems, MainImageItems, Image1Items, Image2Items, Votes, Image3Items, Image4Items, Image5Items, Image6Items, OtherImageItems, CategoryItems, AvailableItems, SpecialItems, PercentDiscountItems,khadamat,newList, recyclerViewlist);
                                     recyclerViewlist.setAdapter(ad2);
                                 } else {
                                     ad = new RVAdapter(context, Mode, NameItems, IdItems, ParentItems, ImageItems, DescriptionItems, CategoryItems, AvailableItems, recyclerViewlist);

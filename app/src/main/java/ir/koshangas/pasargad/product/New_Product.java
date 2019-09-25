@@ -321,14 +321,14 @@ public class New_Product extends AppCompatActivity {
         } else if (address.getString("ShowPrice", "").equals("0")) {
             switchShowPrice.setChecked(false);
         }
-        if (address.getString("ShowNewProduct", "").equals("1")) {
+        if (address.getString("newList", "").equals("1")) {
             switchNewProduct.setChecked(true);
-        } else if (address.getString("ShowNewProduct", "").equals("0")) {
+        } else if (address.getString("newList", "").equals("0")) {
             switchNewProduct.setChecked(false);
         }
-        if (address.getString("ShowKhadamat", "").equals("1")) {
+        if (address.getString("khadamat", "").equals("1")) {
             switchKhadamat.setChecked(true);
-        } else if (address.getString("ShowKhadamat", "").equals("0")) {
+        } else if (address.getString("khadamat", "").equals("0")) {
             switchKhadamat.setChecked(false);
         }
         // Log.i("mohsenjamali", "mohsen4: " + address.getString("isAvailable", ""));

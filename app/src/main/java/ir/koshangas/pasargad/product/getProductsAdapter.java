@@ -28,7 +28,7 @@ import ir.koshangas.pasargad.R;
 public class getProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
-    private List<String> ImageItems, IdItems,ShowPrice, DescriptionItems, NameItems, SpecialItems, priceItems, Image1Items, CategoryItems;
+    private List<String> ImageItems, IdItems,ShowPrice, DescriptionItems, NameItems, SpecialItems, priceItems, Image1Items, CategoryItems,newList,khadamat;
     private List<String> DiscountItems, Image2Items, VotesItems,olaviat,PercentDiscountItems, Image3Items, Image4Items, Image5Items, Image6Items, OtherItems, AvaiableItems;
 
 
@@ -47,7 +47,7 @@ public class getProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 
 
-    public getProductsAdapter(final Context context,List<String>ShowPrice,List<String> olaviat,List<String> DiscountItems, List<String> IdItems, List<String> DescriptionItems, List<String> NameItems, List<String> priceItems, List<String> ImageItems, List<String> Image1Items, List<String> Image2Items, List<String> VotesItems, List<String> Image3Items, List<String> Image4Items, List<String> Image5Items, List<String> Image6Items, List<String> OtherItems, List<String> CategoryItems, List<String> AvaiableItems, List<String> SpecialItems,List<String> PercentDiscountItems, RecyclerView recyclerViewlist) {
+    public getProductsAdapter(final Context context,List<String>ShowPrice,List<String> olaviat,List<String> DiscountItems, List<String> IdItems, List<String> DescriptionItems, List<String> NameItems, List<String> priceItems, List<String> ImageItems, List<String> Image1Items, List<String> Image2Items, List<String> VotesItems, List<String> Image3Items, List<String> Image4Items, List<String> Image5Items, List<String> Image6Items, List<String> OtherItems, List<String> CategoryItems, List<String> AvaiableItems, List<String> SpecialItems,List<String> PercentDiscountItems,List<String>khadamat,List<String>newList, RecyclerView recyclerViewlist) {
 
         this.DiscountItems = DiscountItems;
         this.IdItems = IdItems;
@@ -71,6 +71,8 @@ public class getProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.ShowPrice = ShowPrice;
         this.olaviat = olaviat;
         this.PercentDiscountItems = PercentDiscountItems;
+        this.newList = newList;
+        this.khadamat = khadamat;
 
 //---------------------------
         final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerViewlist.getLayoutManager();
@@ -169,6 +171,8 @@ public class getProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         intent.putExtra("ShowPrice", ShowPrice.get(position));
                         intent.putExtra("olaviat", olaviat.get(position));
                         intent.putExtra("percentDiscount", PercentDiscountItems.get(position));
+                        intent.putExtra("newList", newList.get(position));
+                        intent.putExtra("khadamat", khadamat.get(position));
                         //intent.putExtra("OtherImage", OtherItems.get(position).split(","));
 
 
