@@ -100,7 +100,10 @@ public class getHistoryBasket {
 
                             MiladiToShamsi miladiToShamsi = new MiladiToShamsi();
                             int n = array.length();
-                            if (n == 0) return;
+                            if (n == 0) {
+                                ProgressBar.setVisibility(View.GONE);
+                                return;
+                            }
 
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject person = array.getJSONObject(i);
