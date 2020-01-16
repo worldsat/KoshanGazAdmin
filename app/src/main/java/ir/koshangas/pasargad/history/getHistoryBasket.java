@@ -60,7 +60,7 @@ public class getHistoryBasket {
     private MaterialDialog wait;
     private DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 
-    public void get_Items(final Context context, final ProgressBar ProgressBar, final RecyclerView recyclerViewlist, final TextView emptyText, final ConstraintLayout BasketLayout,Button excelBtn) {
+    public void get_Items(final Context context, final ProgressBar ProgressBar, final RecyclerView recyclerViewlist, final TextView emptyText, final ConstraintLayout BasketLayout, Button excelBtn) {
 
         final SharedPreferences sp = context.getSharedPreferences("Token", 0);
         String urlJsonArray = "http://www.koshangaspasargad.ir/koshangas/admin/" + "getHistoryBasket.php";
@@ -100,6 +100,8 @@ public class getHistoryBasket {
 
                             MiladiToShamsi miladiToShamsi = new MiladiToShamsi();
                             int n = array.length();
+                            if (n == 0) return;
+
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject person = array.getJSONObject(i);
 
